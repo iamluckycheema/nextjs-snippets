@@ -1,6 +1,15 @@
 import { db } from '@/db'
 import Link from 'next/link'
 
+/*1. disable cache (outside API or data might be diffirent with each request)
+export const dynamic = 'force-dynamic'
+2. time-based caching (maybe redit example)
+export const revalidate = 0 //(seconds - 0 will disable caching)
+3. when you are sure that data changed manual revalidation (edit or delete or add)
+import { revelidatePath } from 'next/cache'
+revalidatePath('/route'); 
+*/
+
 export default async function Home() {
   const snippets = await db.snippet.findMany()
 

@@ -3,6 +3,14 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import * as actions from '@/actions'
 
+/*
+[id] due to dynamic routing this will always be dynamic
+but we can force cache it.
+using 'generateStaticParams'
+will get all current data and forEach id it will make a cached page collection collection 
+keep in mind all will happen at build time
+*/
+
 interface SnippetProps {
   params: {
     id: string
