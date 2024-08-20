@@ -2,6 +2,7 @@ import { db } from '@/db'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import * as actions from '@/actions'
+import { Snippet } from 'next/font/google'
 
 /*
 [id] due to dynamic routing this will always be dynamic
@@ -51,4 +52,14 @@ export default async function ShowSnippet(props: SnippetProps) {
       </pre>
     </div>
   )
+}
+
+export async function generateStaticParams() {
+  const snippets = await db.snippet.findMany()
+
+  return snippets.map((snippet) => {
+    return {
+      id: snippet.id.toString(),
+    }
+  })
 }
