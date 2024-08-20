@@ -35,13 +35,20 @@ export async function createSnippet(
     }
   }
 
-  const snippet = await db.snippet.create({
-    data: {
-      title,
-      code,
-    },
-  })
-  console.log(snippet)
+  try {
+    const snippet = await db.snippet.create({
+      data: {
+        title,
+        code,
+      },
+    })
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      return {
+        message: e.message,
+      }
+    }
+  }
 
   redirect('/')
 }
